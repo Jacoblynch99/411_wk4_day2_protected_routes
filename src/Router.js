@@ -10,21 +10,21 @@ import Login from './components/Login'
 // Check the cookies for a cookie called "loggedIn"
 const checkAuth = () => {
     const cookies = cookie.parse(document.cookie)
-
-    // TODO document.cookie = "loggedIn=true;max-age=60*1000"
-    return cookies["loggedIn"] ? true : false
+    return cookies['loggedIn'] ? true : false
 }
 
-
 // Write ProtectedRoute function here
-const ProtectedRoute = ({component: Component, ...rest}) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
-        {...rest}
-        render={(props) => checkAuth()
-        ? <Component {...props} />
-        : <Redirect to="/login" />
-        }
+            {...rest}
+            render={(props) =>
+                checkAuth() ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/login" />
+                )
+            }
         />
     )
 }
@@ -36,8 +36,14 @@ const Router = () => {
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute path="/about" component={About} />
             <ProtectedRoute path="/car/:id" component={Car} />
+            <Route
+                path="*"
+                component={() =>
+                    'This is not the page you are looking for.(404)'
+                }
+            />
         </Switch>
-    );
-};
+    )
+}
 
-export default Router;
+export default Router
