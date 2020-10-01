@@ -3,8 +3,9 @@ import { AppBar, Toolbar, IconButton,
     Typography } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
 
-const Navigation = () => {
+const Navigation = (props) => {
     return (
         <AppBar position="relative">
             <Toolbar>
@@ -27,6 +28,15 @@ const Navigation = () => {
                             window.location.replace("/login")
                         }}>
                         Logout
+                    </li>
+                    <li>
+                        <IconButton
+                            onClick={props.darkMode}
+                            color="inherit"
+                            className="nav-list-item"
+                        >
+                            <Brightness4Icon color="inherit" />
+                        </IconButton>
                     </li>
                 </ul>
             </Toolbar>
